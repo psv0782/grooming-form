@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Запись к грумеру</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #ffe4e1, #fff8dc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .form-container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      max-width: 400px;
+      width: 90%;
+    }
+    .form-container h2 {
+      text-align: center;
+      color: #444;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #333;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #ff1493;
+    }
+    .dog-icon {
+      text-align: center;
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <div class="dog-icon">🐶
+    </div>
+    <h2>Запись к грумеру</h2>
+    <form action="https://n8n.dentalogic.co.uk/webhook/webhook-grooming" method="POST">
+      <label for="name">Имя</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="phone">Телефон</label>
+      <input type="tel" id="phone" name="phone" required />
+
+      <label for="datetime">Желаемая дата и время</label>
+      <input type="datetime-local" id="datetime" name="datetime" required />
+
+      <label for="service">Услуга</label>
+      <select id="service" name="service" required>
+        <option value="Стрижка">Стрижка</option>
+        <option value="Купание">Купание</option>
+        <option value="Груминг пакет">Груминг пакет</option>
+      </select>
+
+      <button type="submit">Записаться</button>
+    </form>
+  </div>
+</body>
+</html>
