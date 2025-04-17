@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Запись к грумеру</title>
+  <title>Grooming Booking</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -22,6 +22,7 @@
       padding: 30px;
       max-width: 400px;
       width: 90%;
+      position: relative;
     }
     .form-container h2 {
       text-align: center;
@@ -58,32 +59,92 @@
       font-size: 48px;
       margin-bottom: 10px;
     }
+    .success-message {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255,255,255,0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      border-radius: 16px;
+      font-size: 1.2rem;
+      color: #444;
+      z-index: 10;
+      animation: fadeIn 0.8s ease forwards;
+      display: none;
+    }
+    .dog-jump {
+      font-size: 64px;
+      animation: bounce 1.5s ease-in-out infinite;
+      margin-bottom: 10px;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
   </style>
 </head>
 <body>
   <div class="form-container">
-    <div class="dog-icon">🐶
-    </div>
-    <h2>Запись к грумеру</h2>
-    <form action="https://n8n.dentalogic.co.uk/webhook/webhook-grooming" method="POST">
-      <label for="name">Имя</label>
+    <div class="dog-icon">🐶</div>
+    <h2>Grooming Booking</h2>
+    <form id="bookingForm" action="https://n8n.dentalogic.co.uk/webhook/webhook-grooming" method="POST">
+      <label for="name">Name</label>
       <input type="text" id="name" name="name" required />
 
-      <label for="phone">Телефон</label>
+      <label for="phone">Phone</label>
       <input type="tel" id="phone" name="phone" required />
 
-      <label for="datetime">Желаемая дата и время</label>
+      <label for="datetime">Preferred Appointment Date and Time</label>
       <input type="datetime-local" id="datetime" name="datetime" required />
 
-      <label for="service">Услуга</label>
+      <label for="service">Service</label>
       <select id="service" name="service" required>
-        <option value="Стрижка">Стрижка</option>
-        <option value="Купание">Купание</option>
-        <option value="Груминг пакет">Груминг пакет</option>
+        <option value="Стрижка">Full Grooming</option>
+        <option value="Купание">Bath & Brush</option>
+        <option value="Груминг пакет">Mini Grooming</option>
       </select>
 
-      <button type="submit">Записаться</button>
+      <button type="submit">Confirm</button>
     </form>
+    <div class="success-message" id="successMessage">
+      <div class="dog-jump">🐕💨</div>
+      <p>Your booking was successfully sent!</p>
+    </div>
   </div>
+
+  <script>
+    const form = document.getElementById('bookingForm');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (response.ok) {
+          successMessage.style.display = 'flex';
+          form.reset();
+        } else {
+          alert('Something went wrong. Please try again.');
+        }
+      })
+      .catch(() => {
+        alert('Something went wrong. Please check your connection.');
+      });
+    });
+  </script>
 </body>
 </html>
