@@ -9,20 +9,22 @@
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #ffe4e1, #fff8dc);
+      background: url('https://cdn.pixabay.com/photo/2021/05/27/17/46/pattern-6289487_960_720.png') repeat;
+      background-size: 100px;
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100vh;
     }
     .form-container {
-      background: #fff;
+      background: rgba(255, 255, 255, 0.95);
       border-radius: 16px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
       padding: 30px;
       max-width: 400px;
       width: 90%;
       position: relative;
+      backdrop-filter: blur(5px);
     }
     .form-container h2 {
       text-align: center;
@@ -58,6 +60,7 @@
       text-align: center;
       font-size: 48px;
       margin-bottom: 10px;
+      animation: wagTail 1s infinite alternate;
     }
     .success-message {
       position: absolute;
@@ -92,11 +95,15 @@
       25% { transform: rotate(5deg); }
       75% { transform: rotate(-5deg); }
     }
+    @keyframes wagTail {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(10deg); }
+    }
   </style>
 </head>
 <body>
   <div class="form-container">
-    <div class="dog-icon">🐶</div>
+    <div class="dog-icon">🐾</div>
     <h2>Grooming Booking</h2>
     <form id="bookingForm" action="https://n8n.dentalogic.co.uk/webhook/webhook-grooming" method="POST">
       <label for="name">Name</label>
